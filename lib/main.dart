@@ -18,7 +18,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-        appBar: AppBar(title: Text('Tarefas')),
+
+        appBar: AppBar(title: Text('Tarefas'),
+        leading: Container(),),
         body: ListView(
           children: [
             Task('Aprender Flutter'),
@@ -76,16 +78,46 @@ class _TaskState extends State<Task> {
                         overflow: TextOverflow.ellipsis),
                       ),
                       width: 200,),
-                      ElevatedButton(onPressed:  () {
-                        setState(() {
-                            nivel++;
-                            print(nivel);
-                        });
-                    }, child: Icon(Icons.arrow_drop_up))
+                      Container(
+                        height: 52, width: 52,
+                        child: ElevatedButton(onPressed:  () {
+                          setState(() {
+                              nivel++;
+                              print(nivel);
+                          });
+                    }, child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Icon( Icons.arrow_drop_up),
+                          Text("UP", style: TextStyle(fontSize: 12),)
+                        ],
+                    )),
+                      )
                     ],
                   ),
                 ),
-                Text('Nível: $nivel', style: TextStyle(color: Colors.white),)
+                Padding(
+
+                  padding: const EdgeInsets.all(12),
+
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(width: 200,
+                        child: LinearProgressIndicator(
+                          color: Colors.white,
+                          value: nivel / 10,
+
+                        ),
+                      ),
+                      Text('Nível: $nivel', style: TextStyle(color: Colors.white)
+                      ),
+                    ],
+                  ),
+                ),
+
               ],
             ),
 

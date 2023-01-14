@@ -23,17 +23,12 @@ class MyApp extends StatelessWidget {
         leading: Container(),),
         body: ListView(
           children: [
-            Task('Aprender Flutter'),
-            Task('Andar de bike'),
-            Task('Meditar'),
-            Task('Caminhada'),
-            Task('Joooogar video game'),
-            Task('Joooogar video game'),
-            Task('Joooogar video game'),
-            Task('Joooogar video game'),
-            Task('Joooogar video game'),
-            Task('Joooogar video game'),
-            Task('Joooogar video game'),
+            Task('Aprender Flutter', '', 5),
+            Task('Andar de bike', '', 4),
+            Task('Meditar', '', 3),
+            Task('Caminhada', '', 2),
+            Task('Joooogar video game', '', 3),
+
           ],
         ),
         floatingActionButton: FloatingActionButton(onPressed: (){}, child: Icon(Icons.add),
@@ -43,8 +38,10 @@ class MyApp extends StatelessWidget {
   }
 }
 class Task extends StatefulWidget {
-  final String nome;
-  const Task(this.nome, {Key? key}) : super(key: key);
+  final String name;
+  final String photo;
+  final int difficult;
+  const Task(this.name,this.photo, this.difficult,  {Key? key}) : super(key: key);
 
   @override
   State<Task> createState() => _TaskState();
@@ -71,13 +68,31 @@ class _TaskState extends State<Task> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(color: Colors.black26, width: 72, height: 100,
+                        child: Image.asset('assets/images/flutter.png',
+                        fit: BoxFit.cover),
                       ),
-                      Container(child: Text(widget.nome,
-                        style:
-                        TextStyle(fontSize: 24,
-                        overflow: TextOverflow.ellipsis),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(child: Text(widget.name,
+                            style:
+                            TextStyle(fontSize: 24,
+                            overflow: TextOverflow.ellipsis),
+                          ),
+                          width: 200,
+                          ),
+                          Row(
+                            children: [
+                              Icon( Icons.star, size: 15, color: (widget.difficult >=1 ? Colors.blue : Colors.blue[100])),
+                              Icon( Icons.star, size: 15, color: (widget.difficult >=2 ? Colors.blue : Colors.blue[100])),
+                              Icon( Icons.star, size: 15, color: (widget.difficult >=3 ? Colors.blue : Colors.blue[100])),
+                              Icon( Icons.star, size: 15, color: (widget.difficult >=4 ? Colors.blue : Colors.blue[100])),
+                              Icon( Icons.star, size: 15, color: (widget.difficult >=5 ? Colors.blue : Colors.blue[100])),
+                            ],
+                          ),
+                        ],
                       ),
-                      width: 200,),
                       Container(
                         height: 52, width: 52,
                         child: ElevatedButton(onPressed:  () {

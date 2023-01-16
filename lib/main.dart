@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(  MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
+  bool opacidade = true;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,7 +23,10 @@ class MyApp extends StatelessWidget {
 
         appBar: AppBar(title: Text('Tarefas'),
         leading: Container(),),
-        body: ListView(
+        body: AnimatedOpacity(
+          opacity: opacidade ? 1 : 0,
+        duration: Duration( milliseconds: 1000 ),
+        child: ListView(
           children: [
             Task('Aprender Flutter', 'assets/images/flutter.png', 5),
             Task('Andar de bike', 'assets/images/bike.jpg', 4),
@@ -31,7 +36,11 @@ class MyApp extends StatelessWidget {
 
           ],
         ),
-        floatingActionButton: FloatingActionButton(onPressed: (){}, child: Icon(Icons.add),
+        ),
+        floatingActionButton: FloatingActionButton(onPressed: (){
+          opacidade = !opacidade;
+          print(opacidade);
+        }, child: Icon(Icons.add),
         ),
       ),
     );

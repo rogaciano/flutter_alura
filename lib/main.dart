@@ -23,11 +23,11 @@ class MyApp extends StatelessWidget {
         leading: Container(),),
         body: ListView(
           children: [
-            Task('Aprender Flutter', '', 5),
-            Task('Andar de bike', '', 4),
-            Task('Meditar', '', 3),
-            Task('Caminhada', '', 2),
-            Task('Joooogar video game', '', 3),
+            Task('Aprender Flutter', 'assets/images/flutter.png', 5),
+            Task('Andar de bike', 'assets/images/bike.jpg', 4),
+            Task('Meditar', 'assets/images/meditar.jpeg', 1),
+            Task('Ler', 'assets/images/leitura.jpg', 2),
+            Task('Jogar video game', 'assets/images/jogar.jpg', 3),
 
           ],
         ),
@@ -59,17 +59,22 @@ class _TaskState extends State<Task> {
       child: Container(
         child: Stack(
           children: [
-            Container(color: Colors.blue, height: 140,
+            Container(height: 140,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: Colors.blue, ),
             ),
             Column(
               children: [
-                Container(color: Colors.white, height: 100,
+                Container(  height: 100, decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: Colors.white,),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(color: Colors.black26, width: 72, height: 100,
-                        child: Image.asset('assets/images/flutter.png',
-                        fit: BoxFit.cover),
+                      Container(width: 72, height: 100,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Colors.black26, ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: Image.asset(widget.photo,
+                          fit: BoxFit.cover),
+                        ),
                       ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -94,6 +99,7 @@ class _TaskState extends State<Task> {
                         ],
                       ),
                       Container(
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
                         height: 52, width: 52,
                         child: ElevatedButton(onPressed:  () {
                           setState(() {
@@ -123,7 +129,7 @@ class _TaskState extends State<Task> {
                       Container(width: 200,
                         child: LinearProgressIndicator(
                           color: Colors.white,
-                          value: nivel / 10,
+                          value: ( widget.difficult > 0 ) ?  nivel / widget.difficult / 10: 1,
 
                         ),
                       ),
